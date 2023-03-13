@@ -6,13 +6,19 @@ import os
 import requests
 import html5lib
 from bs4 import BeautifulSoup
+import inquirer
+
 
 def download(objects,folder):
+    cheked = os.path.isdir(folder)
+    if cheked:
+        print(folder, 'Folder already exists.')
+    else:
+        os.makedirs(folder)
+        print(f'Created folder : {folder}')
+    
     for object in objects:
-        
-        print(object)
         ext_check = ['.svg','.jpg','.png','.gif']
-        
         for ext in ext_check:
             if ext in object:
                 file_url = object.split(ext)[0] + ext
@@ -24,18 +30,10 @@ def download(objects,folder):
                     open(f'{folder}/{file_name}', 'wb').write(r.content)
                 except:
                     print('Skip')
-        
+ 
                 
 if __name__ == '__main__':
-    
     folder = 'downloads'
-    cheked = os.path.isdir(folder)
-    if cheked:
-        print(folder, 'Folder already exists.')
-    else:
-        os.makedirs(folder)
-        print(f'Created folder : {folder}')
-    
     
     ### External file
     # with open('html_file.html', 'r') as f:
