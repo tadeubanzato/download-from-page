@@ -7,11 +7,6 @@ import requests
 import html5lib
 from bs4 import BeautifulSoup
 
-def check_folder(folder):
-    folder = ('downloads')
-    check_folder = os.path.isdir(folder)
-    return check_folder 
-
 def main(objects,folder):
     for object in objects:
         
@@ -28,17 +23,18 @@ def main(objects,folder):
                     r = requests.get(file_url, allow_redirects=True)
                     open(f'{folder}/{file_name}', 'wb').write(r.content)
                 except:
-                    print('skip')
+                    print('Skip')
+        
                 
 if __name__ == '__main__':
-    folder = ('downloads')
-    checked = check_folder(folder)
     
-    if checked:
-        print(folder, "folder already exists.")
+    folder = 'downloads'
+    cheked = os.path.isdir(folder)
+    if cheked:
+        print(folder, 'Folder already exists.')
     else:
         os.makedirs(folder)
-        print("created folder : ", folder)
+        print(f'Created folder : {folder}')
     
     url = 'https://www.uol.com.br'
     r = requests.get(url)
