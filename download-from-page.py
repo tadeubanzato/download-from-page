@@ -7,7 +7,7 @@ import requests
 import html5lib
 from bs4 import BeautifulSoup
 
-def main(objects,folder):
+def download(objects,folder):
     for object in objects:
         
         print(object)
@@ -36,6 +36,11 @@ if __name__ == '__main__':
         os.makedirs(folder)
         print(f'Created folder : {folder}')
     
+    
+    ### External file
+    # with open('html_file.html', 'r') as f:
+    #     r = f.read()
+            
     url = 'https://www.uol.com.br'
     r = requests.get(url)
     soup = BeautifulSoup(r.content, 'html5lib')
@@ -43,4 +48,4 @@ if __name__ == '__main__':
     img_tags = soup.find_all('img')
     objects = [img['src'] for img in img_tags]
     
-    main(objects,folder)
+    download(objects,folder)
