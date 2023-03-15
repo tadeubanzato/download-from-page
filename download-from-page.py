@@ -6,8 +6,6 @@ import os
 import requests
 import html5lib
 from bs4 import BeautifulSoup
-import inquirer
-
 
 def download(objects,folder):
     cheked = os.path.isdir(folder)
